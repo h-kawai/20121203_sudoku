@@ -586,7 +586,7 @@ FlagsType SolveSudoku::checkCell(int i) const
                     board[75] | board[76] | board[77] | board[78] | board[79];
 
         }
-        return 0; /* duumy */
+        return 0; /* dummy */
     } else {
         FlagsType flags = (FlagsType) 0;
         for (int j = 0; j < (BoardSize - 1) * 3 - (BoardSizeSub - 1) * 2; j++)
@@ -619,7 +619,7 @@ void SolveSudoku::makeCheckCell()
         printf(";\n\n");
     }
     printf("        }\n");
-    printf("        return 0; /* duumy */\n");
+    printf("        return 0; /* dummy */\n");
     printf("    } else {\n");
     printf("        FlagsType flags = (FlagsType) 0;\n");
     printf("        for (int j = 0; j < (BoardSize - 1) * 3 - (BoardSizeSub - 1) * 2; j++)\n");
