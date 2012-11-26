@@ -61,7 +61,7 @@ int i, n, *board, EAX; /* レジスタを外部変数として表現 */
 
 void subsub(void)
 {
-	if (i >= BoardSize * BoardSize) { /* 空きがすべて埋まった！ */
+    if (i >= BoardSize * BoardSize) { /* 空きがすべて埋まった！ */
         if (n >= 0) {
             nの値を[EBP+4]を使って書き戻す
             _storeResultAndTestLimit(this);
