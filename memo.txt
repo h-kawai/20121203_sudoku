@@ -61,10 +61,10 @@ void subsub(void)
 {
 	if (i >= BoardSize * BoardSize) { /* 空きがすべて埋まった！ */
         if (n >= 0) {
-			nの値を[EBP+4]を使って書き戻す
-			_storeResultAndTestLimit(this);
+            nの値を[EBP+4]を使って書き戻す
+            _storeResultAndTestLimit(this);
             n++;
-		}
+        }
         return;
     }
     if (board[i] != 0) { i++; subsub(); i--; } /* 最終的にiの値を元に戻す必要があるので、再帰化した */
