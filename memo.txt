@@ -3,20 +3,24 @@
 
 sudoku2:
 
+(0) sudoku2‚ÌÅ“K‰»‚Ìƒe[ƒ}‚ÍuíŽ¯“I‚ÈÅ“K‰»v‚Å‚·B
+
+(1)
+
 ‚ ‚¿‚±‚¿‚ÉŒ»‚ê‚é if (BoardSize == 9) ‚ÌðŒ•ªŠò‚ÍABoardSize‚ª’è”‚È‚Ì‚ÅAƒRƒ“ƒpƒCƒ‹Žž‚É
 •s—v‚È‚Ù‚¤‚ÍÁ‚¦‹Ž‚èAðŒ•ªŠò–½—ß‚à¶¬‚³‚ê‚Ü‚¹‚ñBðŒƒRƒ“ƒpƒCƒ‹‚Ì‘ã‚í‚è‚É‚È‚Á‚Ä‚¢‚Ü‚·B
-
-sudoku2‚ÌÅ“K‰»‚Ìƒe[ƒ}‚ÍuíŽ¯“I‚ÈÅ“K‰»v‚Å‚·B
 
 
 sudoku3:
 
-sudoku3‚ÌÅ“K‰»‚Ìƒe[ƒ}‚ÍuC++‚Ì”ÍˆÍ‚Å‚â‚ê‚é‚±‚Æ‚Í‘S•”‚â‚év‚Å‚·B
+(0) sudoku3‚ÌÅ“K‰»‚Ìƒe[ƒ}‚ÍuC++‚Ì”ÍˆÍ‚Å‚â‚ê‚é‚±‚Æ‚Í‘S•”‚â‚év‚Å‚·B
 
 
 sudoku4:
 
-sudoku4‚ÌÅ“K‰»‚Ìƒe[ƒ}‚Íu–³§ŒÀv‚Å‚·B‚Æ‚É‚©‚­‘¬‚­‚·‚é‚½‚ß‚É‚È‚ç‚È‚ñ‚Å‚à‚µ‚æ‚¤A‚ÆB
+(0) sudoku4‚ÌÅ“K‰»‚Ìƒe[ƒ}‚Íu–³§ŒÀv‚Å‚·B‚Æ‚É‚©‚­‘¬‚­‚·‚é‚½‚ß‚É‚È‚ç‚È‚ñ‚Å‚à‚µ‚æ‚¤A‚ÆB
+
+(1)
 
 ‚Ü‚¸A‚±‚ÌƒvƒƒOƒ‰ƒ€‚ªˆê•”‚ÌŠÂ‹«‚Å‚Ímake‚Å‚«‚È‚¢‚Æ‚¢‚¤•ñ‚ª‚ ‚è‚Ü‚µ‚½B–â‘è‚É‚È‚Á‚Ä‚¢‚é‚Ì‚ÍA
 count9as.nas‚ÌƒAƒZƒ“ƒuƒ‹‚Å‚·BEEE‚Ç‚¤‚â‚çDEPiƒf[ƒ^ŽÀsƒvƒƒeƒNƒVƒ‡ƒ“j‚ð—LŒø‚É‚µ‚Ä
@@ -35,6 +39,8 @@ count9as.nas‚ÌƒAƒZƒ“ƒuƒ‹‚Å‚·BEEE‚Ç‚¤‚â‚çDEPiƒf[ƒ^ŽÀsƒvƒƒeƒNƒVƒ‡ƒ“j‚ð—LŒ
 ’ñ‹Ÿ‚·‚é‚±‚Æ‚ª–Ú“I‚ÅA‚±‚ê‚ª•’Ê‚ÌWindows‚Å–â‘è‚È‚­“®‚¯‚Î‚»‚ê‚Å‚æ‚­A‚»‚ÌŠJ”­ƒc[ƒ‹‚Ü‚Å‚ª
 ‚Ý‚È‚³‚ñ‚ÌŠÂ‹«‚Å“®ì‚·‚é‚©‚Ü‚Å‚Í‹C‚ð”z‚Á‚Ä‚¢‚Ü‚¹‚ñBƒ\[ƒX‚ÌŒöŠJ‚à‰B‚·•K—v‚ª‚È‚¢‚©‚çŒöŠJ
 ‚µ‚Ä‚¢‚é‚¾‚¯‚ÅAiC++•”•ª‚É‚Â‚¢‚Ä‚àj‚Ý‚È‚³‚ñ‚ÌŠÂ‹«‚Å‚Íƒrƒ‹ƒh‚Å‚«‚¸‚É–ð—§‚½‚¸‚©‚à‚µ‚ê‚Ü‚¹‚ñB
+
+(2)
 
 _count9Asm‚ÍC++‚©‚ç‚Ì“ü‚èŒû‚ÅAˆ—‚Ì–{‘Ì‚ÌŠÖ”‚Å‚Í‚ ‚è‚Ü‚¹‚ñBsubsub‚ª–{‘Ì‚ÅA‚±‚ê‚ªC++
 ‚Å‚¢‚¤‚Æ‚±‚ë‚Ìcount()‚ÆcheckCell()‚É‘Š“–‚µ‚Ä‚¢‚Ü‚·B
@@ -99,4 +105,21 @@ fin:
 ê‡‚µ‚©‚È‚­A1ŒÂ‚Ìê‡‚Í‚»‚Ì”Žš‚Å”Õ‚ð–„‚ß‚é‚±‚Æ‚Å‰ð‚ªˆê‚Â‹‚Ü‚é‚ÆŠmM‚Å‚«‚é‚©‚ç‚Å‚·B
 ‚Â‚Ü‚è EAX & (-EAX) ‚Ý‚½‚¢‚ÈŒvŽZ‚ð‚·‚é•K—v‚ª‚È‚¢‚í‚¯‚Å‚·B‚»‚Ìˆ—‚ðÈ—ª‚·‚é‚±‚Æ‚ÅA
 ‚‘¬‰»‚ð‘_‚Á‚Ä‚¢‚Ü‚·B
+
+(3)
+
+C++‚Å‚ÍAextern "C" ‚ÈŠÖ”‚©‚ç‚Í—áŠO‚ªŽg‚¦‚È‚¢‚Æ‚Ì‚±‚Æ‚¾‚Á‚½‚Ì‚ÅiŒ¾‚í‚ê‚Ä‚Ý‚ê‚Î“–‘RIjA
+—áŠO‚ð‚â‚ß‚Äsetjmp/longjmp‚É‘‚«Š·‚¦‚Ä‚¢‚Ü‚·B‚µ‚©‚µA‚»‚à‚»‚àC++‚Ålongjmp‚ðŽg‚¤‚Ì‚ÍŠëŒ¯‚È
+‚±‚Æ‚Å‚·i‚Æ‹³‚¦‚Ä‚à‚ç‚¢‚Ü‚µ‚½jB‚È‚º‚È‚çAlongjmp‚¾‚ÆAŒÄ‚Î‚ê‚é‚×‚«ƒfƒXƒgƒ‰ƒNƒ^‚ª
+ŒÄ‚Î‚ê‚È‚¢‚±‚Æ‚ª‹N‚±‚è‚¤‚é‚©‚ç‚Å‚·i‚Ü‚ ‚¾‚©‚ç‚±‚»—áŠO‚ðŽg‚¤‚×‚«‚È‚Ì‚Å‚·‚ªjB
+
+‚µ‚©‚µ¡‰ñ‚Ì—á‚ÉŒÀ‚ê‚ÎAlongjmp‚ðŽg‚Á‚Ä‚à•½‹C‚È‚Í‚¸‚Å‚·B‚Æ‚¢‚¤‚Ì‚ÍƒfƒXƒgƒ‰ƒNƒ^‚ª•K—v‚É
+‚È‚è‚»‚¤‚Èˆ—‚ðsetjmpˆÈ~‚Ås‚Á‚Ä‚¢‚È‚¢‚©‚ç‚Å‚·B
+
+«—ˆ‚±‚ÌƒvƒƒOƒ‰ƒ€‚ðŠg’£‚µ‚Ä‚¢‚±‚¤‚Æ‚·‚ê‚ÎAã‹L‚Ì§–ñ‚ð‹C‚É‚µ‚È‚¯‚ê‚Î‚¢‚¯‚È‚¢‚Æ‚¢‚¤–â‘è‚ª
+‚ ‚é‚Ì‚Å—Ç‚¢ƒvƒƒOƒ‰ƒ€‚Å‚ ‚é‚Æ‚ÍŒ¾‚¦‚Ü‚¹‚ñ‚ªAŠg’£‚¹‚¸‚É‚±‚ÌƒNƒ‰ƒX‚ðãˆÊƒ‹[ƒ`ƒ“‚©‚çŽg‚¤
+‚¾‚¯‚È‚ç–â‘è‚È‚­Žg‚¦‚é‚ÆŽv‚¢‚Ü‚·B
+
+‚Æ‚¢‚¤‚±‚Æ‚ÅˆÀˆÕ‚Élongjmp‚É“¦‚°‚½Ž„‚ð‹–‚µ‚Ä‚­‚¾‚³‚¢B
+
 
