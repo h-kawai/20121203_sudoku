@@ -42,6 +42,19 @@ count9as.nas‚ÌƒAƒZƒ“ƒuƒ‹‚Å‚·BEEE‚Ç‚¤‚â‚çDEPiƒf[ƒ^ŽÀsƒvƒƒeƒNƒVƒ‡ƒ“j‚ð—LŒ
 
 (2)
 
+‚È‚ºƒAƒZƒ“ƒuƒ‰‰»‚É‚æ‚Á‚Ä‚‘¬‰»‚Å‚«‚½‚Ì‚©‚Æ‚¢‚¤‚±‚Æ‚ðà–¾‚µ‚Ü‚·B
+
+ƒAƒZƒ“ƒuƒ‰‚Å‚ÍƒŒƒWƒXƒ^‚ÌŽg‚¢•û‚ð×‚©‚­§Œä‚Å‚«‚é‚Ì‚ÅAŠÖ”ŒÄ‚Ño‚µŽž‚ÌƒI[ƒo[ƒwƒbƒh‚È‚Ç‚ð
+‚ ‚é’ö“xíŒ¸‚Å‚«‚Ä‚¢‚Ü‚·Bˆø”‚ÍŠî–{“I‚ÉƒŒƒWƒXƒ^“n‚µ‚É‚È‚Á‚Ä‚¢‚Ü‚·B
+‚Ü‚½Žå—v‚È•Ï”‚Í‚·‚×‚ÄƒŒƒWƒXƒ^‰»‚µ‚Ü‚µ‚½BƒŒƒWƒXƒ^‚ÌŽ‚¿‘Ö‚¦‚Ý‚½‚¢‚ÈƒR[ƒh‚à‚Ù‚Æ‚ñ‚Ç
+‚È‚­‚È‚é‚æ‚¤‚É‹C‚ð”z‚è‚Ü‚µ‚½B
+‚±‚ê‚É‚æ‚èAboard[]‚Ì“Ç‚Ýž‚ÝˆÈŠO‚Å‚Í‚Ù‚Æ‚ñ‚Çƒƒ‚ƒŠƒAƒNƒZƒX‚µ‚È‚¢ƒR[ƒh‚É‚È‚Á‚Ä‚¢‚Ü‚·B
+
+‚Ü‚½ƒR[ƒh‚ÌƒAƒ‰ƒCƒ“‚à×‚©‚­§Œä‚Å‚«‚é‚Ì‚ÅAÅ“Ki‚ÆŽv‚í‚ê‚éj”z’u‚É‚È‚é‚æ‚¤‚ÉA×‚©‚­
+Žw’è‚µ‚Ä‚¢‚Ü‚·B
+
+(3)
+
 _count9Asm‚ÍC++‚©‚ç‚Ì“ü‚èŒû‚ÅAˆ—‚Ì–{‘Ì‚ÌŠÖ”‚Å‚Í‚ ‚è‚Ü‚¹‚ñBsubsub‚ª–{‘Ì‚ÅA‚±‚ê‚ªC++
 ‚Å‚¢‚¤‚Æ‚±‚ë‚Ìcount()‚ÆcheckCell()‚É‘Š“–‚µ‚Ä‚¢‚Ü‚·B
 
@@ -106,7 +119,7 @@ fin:
 ‚Â‚Ü‚è EAX & (-EAX) ‚Ý‚½‚¢‚ÈŒvŽZ‚ð‚·‚é•K—v‚ª‚È‚¢‚í‚¯‚Å‚·B‚»‚Ìˆ—‚ðÈ—ª‚·‚é‚±‚Æ‚ÅA
 ‚‘¬‰»‚ð‘_‚Á‚Ä‚¢‚Ü‚·B
 
-(3)
+(4)
 
 C++‚Å‚ÍAextern "C" ‚ÈŠÖ”‚©‚ç‚Í—áŠO‚ªŽg‚¦‚È‚¢‚Æ‚Ì‚±‚Æ‚¾‚Á‚½‚Ì‚ÅiŒ¾‚í‚ê‚Ä‚Ý‚ê‚Î“–‘RIjA
 —áŠO‚ð‚â‚ß‚Äsetjmp/longjmp‚É‘‚«Š·‚¦‚Ä‚¢‚Ü‚·B‚µ‚©‚µA‚»‚à‚»‚àC++‚Ålongjmp‚ðŽg‚¤‚Ì‚ÍŠëŒ¯‚È
