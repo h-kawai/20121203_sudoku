@@ -4,6 +4,7 @@ LC0:
 	.ascii "%3d \0"
 	.text
 	.align 2
+	.p2align 4,,15
 .globl __ZNK5Board5printEv
 	.def	__ZNK5Board5printEv;	.scl	2;	.type	32;	.endef
 __ZNK5Board5printEv:
@@ -13,40 +14,38 @@ __ZNK5Board5printEv:
 	xorl	%edi, %edi
 	pushl	%esi
 	pushl	%ebx
-	pushl	%ebx
-	pushl	%ebx
+	subl	$28, %esp
 	movl	8(%ebp), %eax
 	movl	$0, -20(%ebp)
 	movl	%eax, -16(%ebp)
+	.p2align 4,,15
 L9:
 	movl	-16(%ebp), %eax
-	xorl	%esi, %esi
+	movl	$8, %esi
 	leal	(%edi,%eax), %ebx
+	.p2align 4,,15
 L8:
 	movzbl	(%ebx), %eax
-	incl	%esi
 	incl	%ebx
-	pushl	%eax
-	pushl	$LC0
+	movl	$LC0, (%esp)
+	movl	%eax, 4(%esp)
 	call	_printf
-	popl	%edx
-	cmpl	$8, %esi
-	popl	%ecx
-	jle	L8
-	pushl	$10
-	addl	$9, %edi
+	decl	%esi
+	jns	L8
+	movl	$10, (%esp)
 	call	_putchar
 	incl	-20(%ebp)
-	popl	%eax
+	addl	$9, %edi
 	cmpl	$8, -20(%ebp)
 	jle	L9
-	leal	-12(%ebp), %esp
+	addl	$28, %esp
 	popl	%ebx
 	popl	%esi
 	popl	%edi
 	popl	%ebp
 	ret
 	.align 2
+	.p2align 4,,15
 .globl __ZN11SolveSudoku9initTableEv
 	.def	__ZN11SolveSudoku9initTableEv;	.scl	2;	.type	32;	.endef
 __ZN11SolveSudoku9initTableEv:
@@ -54,102 +53,117 @@ __ZN11SolveSudoku9initTableEv:
 	movl	%esp, %ebp
 	pushl	%edi
 	pushl	%esi
-	pushl	%ebx
-	subl	$116, %esp
-	movl	8(%ebp), %eax
-	movl	$0, -116(%ebp)
-	movl	$0, -124(%ebp)
-	movl	%eax, -112(%ebp)
-L42:
-	xorl	%edx, %edx
-L21:
-	movb	$0, -108(%edx,%ebp)
-	incl	%edx
-	cmpl	$80, %edx
-	jle	L21
-	movl	-116(%ebp), %eax
-	movl	$9, %ecx
-	cltd
-	idivl	%ecx
-	movl	%edx, %esi
-	movl	%eax, %ebx
-	xorl	%edx, %edx
-	leal	-108(%esi,%ebp), %ecx
-L27:
-	movb	$1, (%ecx)
-	imull	$9, %ebx, %eax
-	addl	$9, %ecx
-	addl	%edx, %eax
-	incl	%edx
-	cmpl	$8, %edx
-	movb	$1, -108(%eax,%ebp)
-	jle	L27
-	movl	%esi, %eax
-	movl	$3, %ecx
-	cltd
-	idivl	%ecx
-	movl	%esi, %edi
-	movl	%ebx, %eax
 	xorl	%esi, %esi
-	subl	%edx, %edi
+	pushl	%ebx
+	subl	$124, %esp
+	movl	8(%ebp), %eax
+	movl	$0, -128(%ebp)
+	movl	%eax, -124(%ebp)
+L43:
+	xorl	%ecx, %ecx
+	.p2align 4,,15
+L22:
+	movb	$0, -120(%ecx,%ebp)
+	incl	%ecx
+	cmpl	$80, %ecx
+	jle	L22
+	movl	$954437177, %eax
+	imull	-128(%ebp)
+	movl	-128(%ebp), %eax
+	movl	%edx, %ecx
+	sarl	%ecx
 	cltd
-	idivl	%ecx
-	subl	%edx, %ebx
-	imull	$9, %ebx, %edx
-L36:
-	leal	(%edi,%edx), %eax
+	subl	%edx, %ecx
+	leal	0(,%ecx,8), %edx
+	movl	%ecx, %edi
+	leal	(%edx,%ecx), %eax
+	movl	-128(%ebp), %ecx
+	movl	%eax, %ebx
+	subl	%eax, %ecx
+	movl	%ecx, -132(%ebp)
+	movl	-132(%ebp), %eax
 	xorl	%ecx, %ecx
-	leal	-108(%eax,%ebp), %eax
-L35:
-	movb	$1, (%eax)
+	leal	-120(%eax,%ebp), %edx
+	.p2align 4,,15
+L28:
+	movb	$1, (%edx)
+	leal	(%ebx,%ecx), %eax
 	incl	%ecx
-	incl	%eax
-	cmpl	$2, %ecx
-	jle	L35
-	incl	%esi
+	movb	$1, -120(%eax,%ebp)
 	addl	$9, %edx
-	cmpl	$2, %esi
-	jle	L36
-	xorl	%ecx, %ecx
-	xorl	%edx, %edx
-L41:
-	cmpb	$0, -108(%edx,%ebp)
-	je	L39
-	movl	-124(%ebp), %eax
-	movl	-112(%ebp), %ebx
-	addl	%ecx, %eax
-	movl	%edx, 324(%ebx,%eax,4)
+	cmpl	$8, %ecx
+	jle	L28
+	movl	$1431655766, %eax
+	leal	-24(%ebp), %ecx
+	xorl	%ebx, %ebx
+	imull	-132(%ebp)
+	movl	-132(%ebp), %eax
+	sarl	$31, %eax
+	subl	%eax, %edx
+	leal	(%edx,%edx,2), %edx
+	movl	$1431655766, %eax
+	movl	%edx, -132(%ebp)
+	imull	%edi
+	movl	%edi, %eax
+	sarl	$31, %eax
+	subl	%eax, %edx
+	movl	-132(%ebp), %eax
+	leal	(%edx,%edx,2), %edx
+	leal	(%edx,%edx,8), %edx
+	addl	%eax, %edx
+	addl	%ecx, %edx
+L37:
+	leal	-96(%edx), %ecx
+	movl	$2, %eax
+L36:
+	movb	$1, (%ecx)
 	incl	%ecx
-L39:
+	decl	%eax
+	jns	L36
+	incl	%ebx
+	addl	$9, %edx
+	cmpl	$2, %ebx
+	jle	L37
+	xorl	%edx, %edx
+	xorl	%ecx, %ecx
+	.p2align 4,,15
+L42:
+	cmpb	$0, -120(%ecx,%ebp)
+	je	L40
+	movl	-124(%ebp), %ebx
+	leal	(%esi,%edx), %eax
 	incl	%edx
-	cmpl	$80, %edx
-	jle	L41
-	incl	-116(%ebp)
-	addl	$20, -124(%ebp)
-	cmpl	$80, -116(%ebp)
+	movl	%ecx, 324(%ebx,%eax,4)
+L40:
+	incl	%ecx
+	cmpl	$80, %ecx
 	jle	L42
-	addl	$116, %esp
+	incl	-128(%ebp)
+	addl	$20, %esi
+	cmpl	$80, -128(%ebp)
+	jle	L43
+	addl	$124, %esp
 	popl	%ebx
 	popl	%esi
 	popl	%edi
 	popl	%ebp
 	ret
 	.align 2
+	.p2align 4,,15
 .globl __ZNK11SolveSudoku9checkCellEi
 	.def	__ZNK11SolveSudoku9checkCellEi;	.scl	2;	.type	32;	.endef
 __ZNK11SolveSudoku9checkCellEi:
 	pushl	%ebp
 	xorl	%eax, %eax
 	movl	%esp, %ebp
-	movl	12(%ebp), %ecx
-	movl	8(%ebp), %edx
-	cmpl	$80, %ecx
-	ja	L55
-	jmp	*L139(,%ecx,4)
+	movl	12(%ebp), %edx
+	movl	8(%ebp), %ecx
+	cmpl	$80, %edx
+	ja	L56
+	jmp	*L140(,%edx,4)
 	.section .rdata,"dr"
 	.align 4
-L139:
-	.long	L58
+L140:
 	.long	L59
 	.long	L60
 	.long	L61
@@ -230,1331 +244,2288 @@ L139:
 	.long	L136
 	.long	L137
 	.long	L138
+	.long	L139
 	.text
-L58:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	jmp	L164
-L59:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	jmp	L167
-L60:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	jmp	L170
-L61:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	jmp	L173
-L62:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	jmp	L176
-L63:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	jmp	L179
-L64:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	jmp	L183
-L65:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	jmp	L186
-L66:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	12(%edx), %eax
-	orl	16(%edx), %eax
-	orl	20(%edx), %eax
-	orl	24(%edx), %eax
-	orl	28(%edx), %eax
-	orl	32(%edx), %eax
-	jmp	L189
-L67:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L164:
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-L165:
-	orl	108(%edx), %eax
-	orl	144(%edx), %eax
-	orl	180(%edx), %eax
-	jmp	L160
-L68:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L167:
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-L168:
-	orl	112(%edx), %eax
-	orl	148(%edx), %eax
-	orl	184(%edx), %eax
-	jmp	L159
-L69:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L170:
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-L171:
-	orl	116(%edx), %eax
-	orl	152(%edx), %eax
-L172:
-	orl	188(%edx), %eax
-	jmp	L158
-L70:
-	movl	16(%edx), %eax
-	orl	12(%edx), %eax
-	orl	20(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L173:
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-L174:
-	orl	120(%edx), %eax
-	orl	156(%edx), %eax
-	orl	192(%edx), %eax
-	jmp	L157
-L71:
-	movl	16(%edx), %eax
-	orl	12(%edx), %eax
-	orl	20(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L176:
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-L177:
-	orl	124(%edx), %eax
-	orl	160(%edx), %eax
-	orl	196(%edx), %eax
-	jmp	L156
-L72:
-	movl	16(%edx), %eax
-	orl	12(%edx), %eax
-	orl	20(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L179:
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-L180:
-	orl	128(%edx), %eax
-	orl	164(%edx), %eax
-L181:
-	orl	200(%edx), %eax
-	jmp	L155
-L73:
-	movl	28(%edx), %eax
-	orl	24(%edx), %eax
-	orl	32(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-L183:
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L184:
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	orl	132(%edx), %eax
-	orl	168(%edx), %eax
-	orl	204(%edx), %eax
-	jmp	L163
-L74:
-	movl	28(%edx), %eax
-	orl	24(%edx), %eax
-	orl	32(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-L186:
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L187:
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	orl	136(%edx), %eax
-	orl	172(%edx), %eax
-	orl	208(%edx), %eax
-	jmp	L162
-L75:
-	movl	28(%edx), %eax
-	orl	24(%edx), %eax
-	orl	32(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-L189:
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-L190:
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	orl	140(%edx), %eax
-	orl	176(%edx), %eax
-	jmp	L161
-L76:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	jmp	L165
-L77:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	jmp	L168
-L78:
-	movl	4(%edx), %eax
-	orl	(%edx), %eax
-	orl	8(%edx), %eax
-	orl	36(%edx), %eax
-	orl	40(%edx), %eax
-	orl	44(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	jmp	L171
-L79:
-	movl	16(%edx), %eax
-	orl	12(%edx), %eax
-	orl	20(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	jmp	L174
-L80:
-	movl	16(%edx), %eax
-	orl	12(%edx), %eax
-	orl	20(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	jmp	L177
-L81:
-	movl	16(%edx), %eax
-	orl	12(%edx), %eax
-	orl	20(%edx), %eax
-	orl	48(%edx), %eax
-	orl	52(%edx), %eax
-	orl	56(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	orl	96(%edx), %eax
-	orl	100(%edx), %eax
-	orl	104(%edx), %eax
-	jmp	L180
-L82:
-	movl	28(%edx), %eax
-	orl	24(%edx), %eax
-	orl	32(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	jmp	L184
-L83:
-	movl	28(%edx), %eax
-	orl	24(%edx), %eax
-	orl	32(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	jmp	L187
-L84:
-	movl	28(%edx), %eax
-	orl	24(%edx), %eax
-	orl	32(%edx), %eax
-	orl	60(%edx), %eax
-	orl	64(%edx), %eax
-	orl	68(%edx), %eax
-	orl	72(%edx), %eax
-	orl	76(%edx), %eax
-	orl	80(%edx), %eax
-	orl	84(%edx), %eax
-	orl	88(%edx), %eax
-	orl	92(%edx), %eax
-	jmp	L190
-L85:
-	movl	36(%edx), %eax
-	orl	(%edx), %eax
-	orl	72(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	jmp	L166
-L86:
-	movl	40(%edx), %eax
-	orl	4(%edx), %eax
-	orl	76(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	jmp	L169
-L87:
-	movl	44(%edx), %eax
-	orl	8(%edx), %eax
-	orl	80(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	jmp	L197
-L88:
-	movl	48(%edx), %eax
-	orl	12(%edx), %eax
-	orl	84(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	jmp	L175
-L89:
-	movl	52(%edx), %eax
-	orl	16(%edx), %eax
-	orl	88(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	jmp	L178
-L90:
-	movl	56(%edx), %eax
-	orl	20(%edx), %eax
-	orl	92(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	jmp	L198
-L91:
-	movl	60(%edx), %eax
-	orl	24(%edx), %eax
-	orl	96(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	jmp	L182
-L92:
-	movl	64(%edx), %eax
-	orl	28(%edx), %eax
-	orl	100(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	jmp	L185
-L93:
-	movl	68(%edx), %eax
-	orl	32(%edx), %eax
-	orl	104(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	jmp	L188
-L94:
-	movl	36(%edx), %eax
-	orl	(%edx), %eax
-	orl	72(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-L166:
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	jmp	L160
-L95:
-	movl	40(%edx), %eax
-	orl	4(%edx), %eax
-	orl	76(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-L169:
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	jmp	L159
-L96:
-	movl	44(%edx), %eax
-	orl	8(%edx), %eax
-	orl	80(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-L197:
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	jmp	L172
-L97:
-	movl	48(%edx), %eax
-	orl	12(%edx), %eax
-	orl	84(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-L175:
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	jmp	L157
-L98:
-	movl	52(%edx), %eax
-	orl	16(%edx), %eax
-	orl	88(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-L178:
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	jmp	L156
-L99:
-	movl	56(%edx), %eax
-	orl	20(%edx), %eax
-	orl	92(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-L198:
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	jmp	L181
-L100:
-	movl	60(%edx), %eax
-	orl	24(%edx), %eax
-	orl	96(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-L182:
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-	jmp	L154
-L101:
-	movl	64(%edx), %eax
-	orl	28(%edx), %eax
-	orl	100(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-L185:
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-	jmp	L153
-L102:
-	movl	68(%edx), %eax
-	orl	32(%edx), %eax
-	orl	104(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-L188:
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-	jmp	L152
-L103:
-	movl	36(%edx), %eax
-	orl	(%edx), %eax
-	orl	72(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L160:
-	orl	216(%edx), %eax
-	orl	252(%edx), %eax
-	jmp	L55
-L104:
-	movl	40(%edx), %eax
-	orl	4(%edx), %eax
-	orl	76(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L159:
-	orl	220(%edx), %eax
-	orl	256(%edx), %eax
-	jmp	L55
-L105:
-	movl	44(%edx), %eax
-	orl	8(%edx), %eax
-	orl	80(%edx), %eax
-	orl	108(%edx), %eax
-	orl	112(%edx), %eax
-	orl	116(%edx), %eax
-	orl	144(%edx), %eax
-	orl	148(%edx), %eax
-	orl	152(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L158:
-	orl	224(%edx), %eax
-	orl	260(%edx), %eax
-	jmp	L55
-L106:
-	movl	48(%edx), %eax
-	orl	12(%edx), %eax
-	orl	84(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L157:
-	orl	228(%edx), %eax
-	orl	264(%edx), %eax
-	jmp	L55
-L107:
-	movl	52(%edx), %eax
-	orl	16(%edx), %eax
-	orl	88(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L156:
-	orl	232(%edx), %eax
-	orl	268(%edx), %eax
-	jmp	L55
-L108:
-	movl	56(%edx), %eax
-	orl	20(%edx), %eax
-	orl	92(%edx), %eax
-	orl	120(%edx), %eax
-	orl	124(%edx), %eax
-	orl	128(%edx), %eax
-	orl	156(%edx), %eax
-	orl	160(%edx), %eax
-	orl	164(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L155:
-	orl	236(%edx), %eax
-	orl	272(%edx), %eax
-	jmp	L55
-L109:
-	movl	60(%edx), %eax
-	orl	24(%edx), %eax
-	orl	96(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-L154:
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L163:
-	orl	240(%edx), %eax
-	orl	276(%edx), %eax
-	jmp	L55
-L110:
-	movl	64(%edx), %eax
-	orl	28(%edx), %eax
-	orl	100(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-L153:
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-	orl	212(%edx), %eax
-L162:
-	orl	244(%edx), %eax
-	orl	280(%edx), %eax
-	jmp	L55
-L111:
-	movl	68(%edx), %eax
-	orl	32(%edx), %eax
-	orl	104(%edx), %eax
-	orl	132(%edx), %eax
-	orl	136(%edx), %eax
-	orl	140(%edx), %eax
-	orl	168(%edx), %eax
-	orl	172(%edx), %eax
-	orl	176(%edx), %eax
-	orl	180(%edx), %eax
-	orl	184(%edx), %eax
-	orl	188(%edx), %eax
-	orl	192(%edx), %eax
-	orl	196(%edx), %eax
-	orl	200(%edx), %eax
-L152:
-	orl	204(%edx), %eax
-	orl	208(%edx), %eax
-L161:
-	orl	212(%edx), %eax
-	orl	248(%edx), %eax
-	orl	284(%edx), %eax
-	jmp	L55
-L112:
-	movl	36(%edx), %eax
-	orl	(%edx), %eax
-	orl	72(%edx), %eax
-	orl	108(%edx), %eax
-	orl	144(%edx), %eax
-	orl	180(%edx), %eax
-	jmp	L191
-L113:
-	movl	40(%edx), %eax
-	orl	4(%edx), %eax
-	orl	76(%edx), %eax
-	orl	112(%edx), %eax
-	orl	148(%edx), %eax
-	orl	184(%edx), %eax
-L191:
-	orl	216(%edx), %eax
-	orl	220(%edx), %eax
-	orl	224(%edx), %eax
-	orl	228(%edx), %eax
-	orl	232(%edx), %eax
-	orl	236(%edx), %eax
-	orl	240(%edx), %eax
-	orl	244(%edx), %eax
-	orl	248(%edx), %eax
-	orl	252(%edx), %eax
-	orl	256(%edx), %eax
-	orl	260(%edx), %eax
-	jmp	L151
-L114:
-	movl	44(%edx), %eax
-	orl	8(%edx), %eax
-	orl	80(%edx), %eax
-	orl	116(%edx), %eax
-	orl	152(%edx), %eax
-	orl	188(%edx), %eax
-	jmp	L191
-L115:
-	movl	48(%edx), %eax
-	orl	12(%edx), %eax
-	orl	84(%edx), %eax
-	orl	120(%edx), %eax
-	orl	156(%edx), %eax
-	orl	192(%edx), %eax
-	jmp	L192
-L116:
-	movl	52(%edx), %eax
-	orl	16(%edx), %eax
-	orl	88(%edx), %eax
-	orl	124(%edx), %eax
-	orl	160(%edx), %eax
-	orl	196(%edx), %eax
-L192:
-	orl	216(%edx), %eax
-	orl	220(%edx), %eax
-	orl	224(%edx), %eax
-	orl	228(%edx), %eax
-	orl	232(%edx), %eax
-	orl	236(%edx), %eax
-	orl	240(%edx), %eax
-	orl	244(%edx), %eax
-	orl	248(%edx), %eax
-	orl	264(%edx), %eax
-	orl	268(%edx), %eax
-	orl	272(%edx), %eax
-	jmp	L150
-L117:
-	movl	56(%edx), %eax
-	orl	20(%edx), %eax
-	orl	92(%edx), %eax
-	orl	128(%edx), %eax
-	orl	164(%edx), %eax
-	orl	200(%edx), %eax
-	jmp	L192
-L118:
-	movl	60(%edx), %eax
-	orl	24(%edx), %eax
-	orl	96(%edx), %eax
-	orl	132(%edx), %eax
-	orl	168(%edx), %eax
-	orl	204(%edx), %eax
-	jmp	L195
-L119:
-	movl	64(%edx), %eax
-	orl	28(%edx), %eax
-	orl	100(%edx), %eax
-	orl	136(%edx), %eax
-	orl	172(%edx), %eax
-	orl	208(%edx), %eax
-L195:
-	orl	216(%edx), %eax
-	orl	220(%edx), %eax
-	orl	224(%edx), %eax
-	orl	228(%edx), %eax
-	orl	232(%edx), %eax
-	orl	236(%edx), %eax
-	orl	240(%edx), %eax
-	orl	244(%edx), %eax
-	orl	248(%edx), %eax
-L196:
-	orl	276(%edx), %eax
-	orl	280(%edx), %eax
-	orl	284(%edx), %eax
-	jmp	L147
-L120:
-	movl	68(%edx), %eax
-	orl	32(%edx), %eax
-	orl	104(%edx), %eax
-	orl	140(%edx), %eax
-	orl	176(%edx), %eax
-	orl	212(%edx), %eax
-	jmp	L195
-L121:
-	movl	36(%edx), %eax
-	orl	(%edx), %eax
-	orl	72(%edx), %eax
-	orl	108(%edx), %eax
-	orl	144(%edx), %eax
-	orl	180(%edx), %eax
-	jmp	L149
-L122:
-	movl	40(%edx), %eax
-	orl	4(%edx), %eax
-	orl	76(%edx), %eax
-	orl	112(%edx), %eax
-	orl	148(%edx), %eax
-	orl	184(%edx), %eax
-	jmp	L149
-L123:
-	movl	44(%edx), %eax
-	orl	8(%edx), %eax
-	orl	80(%edx), %eax
-	orl	116(%edx), %eax
-	orl	152(%edx), %eax
-	orl	188(%edx), %eax
-L149:
-	orl	216(%edx), %eax
-	orl	220(%edx), %eax
-	orl	224(%edx), %eax
-	orl	252(%edx), %eax
-	orl	256(%edx), %eax
-	orl	260(%edx), %eax
-	orl	264(%edx), %eax
-	orl	268(%edx), %eax
-	orl	272(%edx), %eax
-	orl	276(%edx), %eax
-	orl	280(%edx), %eax
-	orl	284(%edx), %eax
-L151:
-	orl	288(%edx), %eax
-	orl	292(%edx), %eax
-	jmp	L55
-L124:
-	movl	48(%edx), %eax
-	orl	12(%edx), %eax
-	orl	84(%edx), %eax
-	orl	120(%edx), %eax
-	orl	156(%edx), %eax
-	orl	192(%edx), %eax
-	jmp	L148
-L125:
-	movl	52(%edx), %eax
-	orl	16(%edx), %eax
-	orl	88(%edx), %eax
-	orl	124(%edx), %eax
-	orl	160(%edx), %eax
-	orl	196(%edx), %eax
-	jmp	L148
-L126:
-	movl	56(%edx), %eax
-	orl	20(%edx), %eax
-	orl	92(%edx), %eax
-	orl	128(%edx), %eax
-	orl	164(%edx), %eax
-	orl	200(%edx), %eax
-L148:
-	orl	228(%edx), %eax
-	orl	232(%edx), %eax
-	orl	236(%edx), %eax
-	orl	252(%edx), %eax
-	orl	256(%edx), %eax
-	orl	260(%edx), %eax
-	orl	264(%edx), %eax
-	orl	268(%edx), %eax
-	orl	272(%edx), %eax
-	orl	276(%edx), %eax
-	orl	280(%edx), %eax
-	orl	284(%edx), %eax
-L150:
-	orl	300(%edx), %eax
-	orl	304(%edx), %eax
-	jmp	L55
-L127:
-	movl	60(%edx), %eax
-	orl	24(%edx), %eax
-	orl	96(%edx), %eax
-	orl	132(%edx), %eax
-	orl	168(%edx), %eax
-	orl	204(%edx), %eax
-	jmp	L199
-L128:
-	movl	64(%edx), %eax
-	orl	28(%edx), %eax
-	orl	100(%edx), %eax
-	orl	136(%edx), %eax
-	orl	172(%edx), %eax
-	orl	208(%edx), %eax
-	jmp	L199
-L129:
-	movl	68(%edx), %eax
-	orl	32(%edx), %eax
-	orl	104(%edx), %eax
-	orl	140(%edx), %eax
-	orl	176(%edx), %eax
-	orl	212(%edx), %eax
-L199:
-	orl	240(%edx), %eax
-	orl	244(%edx), %eax
-	orl	248(%edx), %eax
-	orl	252(%edx), %eax
-	orl	256(%edx), %eax
-	orl	260(%edx), %eax
-	orl	264(%edx), %eax
-	orl	268(%edx), %eax
-	orl	272(%edx), %eax
-	jmp	L196
-L130:
-	movl	36(%edx), %eax
-	orl	(%edx), %eax
-	orl	72(%edx), %eax
-	orl	108(%edx), %eax
-	orl	144(%edx), %eax
-	orl	180(%edx), %eax
-	jmp	L193
-L131:
-	movl	40(%edx), %eax
-	orl	4(%edx), %eax
-	orl	76(%edx), %eax
-	orl	112(%edx), %eax
-	orl	148(%edx), %eax
-	orl	184(%edx), %eax
-L193:
-	orl	216(%edx), %eax
-	orl	220(%edx), %eax
-	orl	224(%edx), %eax
-	orl	252(%edx), %eax
-	orl	256(%edx), %eax
-	orl	260(%edx), %eax
-	jmp	L146
-L132:
-	movl	44(%edx), %eax
-	orl	8(%edx), %eax
-	orl	80(%edx), %eax
-	orl	116(%edx), %eax
-	orl	152(%edx), %eax
-	orl	188(%edx), %eax
-	jmp	L193
-L133:
-	movl	48(%edx), %eax
-	orl	12(%edx), %eax
-	orl	84(%edx), %eax
-	orl	120(%edx), %eax
-	orl	156(%edx), %eax
-	orl	192(%edx), %eax
-	jmp	L194
-L134:
-	movl	52(%edx), %eax
-	orl	16(%edx), %eax
-	orl	88(%edx), %eax
-	orl	124(%edx), %eax
-	orl	160(%edx), %eax
-	orl	196(%edx), %eax
-L194:
-	orl	228(%edx), %eax
-	orl	232(%edx), %eax
-	orl	236(%edx), %eax
-	orl	264(%edx), %eax
-	orl	268(%edx), %eax
-	orl	272(%edx), %eax
-	jmp	L146
-L135:
-	movl	56(%edx), %eax
-	orl	20(%edx), %eax
-	orl	92(%edx), %eax
-	orl	128(%edx), %eax
-	orl	164(%edx), %eax
-	orl	200(%edx), %eax
-	jmp	L194
-L136:
-	movl	60(%edx), %eax
-	orl	24(%edx), %eax
-	orl	96(%edx), %eax
-	orl	132(%edx), %eax
-	orl	168(%edx), %eax
-	orl	204(%edx), %eax
-	jmp	L145
-L137:
-	movl	64(%edx), %eax
-	orl	28(%edx), %eax
-	orl	100(%edx), %eax
-	orl	136(%edx), %eax
-	orl	172(%edx), %eax
-	orl	208(%edx), %eax
-	jmp	L145
-L138:
-	movl	68(%edx), %eax
-	orl	32(%edx), %eax
-	orl	104(%edx), %eax
-	orl	140(%edx), %eax
-	orl	176(%edx), %eax
-	orl	212(%edx), %eax
-L145:
-	orl	240(%edx), %eax
-	orl	244(%edx), %eax
-	orl	248(%edx), %eax
-	orl	276(%edx), %eax
-	orl	280(%edx), %eax
-	orl	284(%edx), %eax
-L146:
-	orl	288(%edx), %eax
-	orl	292(%edx), %eax
-	orl	296(%edx), %eax
-	orl	300(%edx), %eax
-	orl	304(%edx), %eax
-	orl	308(%edx), %eax
-L147:
-	orl	312(%edx), %eax
-	orl	316(%edx), %eax
-L55:
+L139:
+	movl	32(%ecx), %edx
+	movl	68(%ecx), %eax
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L253:
+	orl	%edx, %eax
+	movl	240(%ecx), %edx
+	orl	%edx, %eax
+	movl	244(%ecx), %edx
+	orl	%edx, %eax
+	movl	248(%ecx), %edx
+	orl	%edx, %eax
+	movl	276(%ecx), %edx
+	orl	%edx, %eax
+	movl	280(%ecx), %edx
+	orl	%edx, %eax
+	movl	284(%ecx), %edx
+L254:
+	orl	%edx, %eax
+	movl	288(%ecx), %edx
+	orl	%edx, %eax
+	movl	292(%ecx), %edx
+	orl	%edx, %eax
+	movl	296(%ecx), %edx
+	orl	%edx, %eax
+	movl	300(%ecx), %edx
+	orl	%edx, %eax
+	movl	304(%ecx), %edx
+	orl	%edx, %eax
+	movl	308(%ecx), %edx
+L255:
+	orl	%edx, %eax
+	movl	312(%ecx), %edx
+	orl	%edx, %eax
+	movl	316(%ecx), %edx
+	orl	%edx, %eax
+	.p2align 4,,15
+L56:
 	popl	%ebp
 	ret
+L138:
+	movl	28(%ecx), %edx
+	movl	64(%ecx), %eax
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	jmp	L253
+L137:
+	movl	24(%ecx), %edx
+	movl	60(%ecx), %eax
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	jmp	L253
+L136:
+	movl	20(%ecx), %edx
+	movl	56(%ecx), %eax
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+L252:
+	orl	%edx, %eax
+	movl	228(%ecx), %edx
+	orl	%edx, %eax
+	movl	232(%ecx), %edx
+	orl	%edx, %eax
+	movl	236(%ecx), %edx
+	orl	%edx, %eax
+	movl	264(%ecx), %edx
+	orl	%edx, %eax
+	movl	268(%ecx), %edx
+	orl	%edx, %eax
+	movl	272(%ecx), %edx
+	jmp	L254
+L135:
+	movl	16(%ecx), %edx
+	movl	52(%ecx), %eax
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	jmp	L252
+L134:
+	movl	12(%ecx), %edx
+	movl	48(%ecx), %eax
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	jmp	L252
+L133:
+	movl	8(%ecx), %edx
+	movl	44(%ecx), %eax
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+L251:
+	orl	%edx, %eax
+	movl	216(%ecx), %edx
+	orl	%edx, %eax
+	movl	220(%ecx), %edx
+	orl	%edx, %eax
+	movl	224(%ecx), %edx
+	orl	%edx, %eax
+	movl	252(%ecx), %edx
+	orl	%edx, %eax
+	movl	256(%ecx), %edx
+	orl	%edx, %eax
+	movl	260(%ecx), %edx
+	jmp	L254
+L132:
+	movl	4(%ecx), %edx
+	movl	40(%ecx), %eax
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	jmp	L251
+L131:
+	movl	(%ecx), %edx
+	movl	36(%ecx), %eax
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	jmp	L251
+L130:
+	movl	32(%ecx), %edx
+	movl	68(%ecx), %eax
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L250:
+	orl	%edx, %eax
+	movl	240(%ecx), %edx
+	orl	%edx, %eax
+	movl	244(%ecx), %edx
+	orl	%edx, %eax
+	movl	248(%ecx), %edx
+	orl	%edx, %eax
+	movl	252(%ecx), %edx
+	orl	%edx, %eax
+	movl	256(%ecx), %edx
+	orl	%edx, %eax
+	movl	260(%ecx), %edx
+	orl	%edx, %eax
+	movl	264(%ecx), %edx
+	orl	%edx, %eax
+	movl	268(%ecx), %edx
+	orl	%edx, %eax
+	movl	272(%ecx), %edx
+L245:
+	orl	%edx, %eax
+	movl	276(%ecx), %edx
+	orl	%edx, %eax
+	movl	280(%ecx), %edx
+	orl	%edx, %eax
+	movl	284(%ecx), %edx
+	jmp	L255
+L129:
+	movl	28(%ecx), %edx
+	movl	64(%ecx), %eax
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	jmp	L250
+L128:
+	movl	24(%ecx), %edx
+	movl	60(%ecx), %eax
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	jmp	L250
+L127:
+	movl	20(%ecx), %edx
+	movl	56(%ecx), %eax
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+L248:
+	orl	%edx, %eax
+	movl	228(%ecx), %edx
+	orl	%edx, %eax
+	movl	232(%ecx), %edx
+	orl	%edx, %eax
+	movl	236(%ecx), %edx
+	orl	%edx, %eax
+	movl	252(%ecx), %edx
+	orl	%edx, %eax
+	movl	256(%ecx), %edx
+	orl	%edx, %eax
+	movl	260(%ecx), %edx
+	orl	%edx, %eax
+	movl	264(%ecx), %edx
+	orl	%edx, %eax
+	movl	268(%ecx), %edx
+	orl	%edx, %eax
+	movl	272(%ecx), %edx
+	orl	%edx, %eax
+	movl	276(%ecx), %edx
+	orl	%edx, %eax
+	movl	280(%ecx), %edx
+	orl	%edx, %eax
+	movl	284(%ecx), %edx
+L249:
+	orl	%edx, %eax
+	movl	300(%ecx), %edx
+	orl	%edx, %eax
+	movl	304(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L126:
+	movl	16(%ecx), %edx
+	movl	52(%ecx), %eax
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	jmp	L248
+L125:
+	movl	12(%ecx), %edx
+	movl	48(%ecx), %eax
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	jmp	L248
+L124:
+	movl	8(%ecx), %edx
+	movl	44(%ecx), %eax
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+L246:
+	orl	%edx, %eax
+	movl	216(%ecx), %edx
+	orl	%edx, %eax
+	movl	220(%ecx), %edx
+	orl	%edx, %eax
+	movl	224(%ecx), %edx
+	orl	%edx, %eax
+	movl	252(%ecx), %edx
+	orl	%edx, %eax
+	movl	256(%ecx), %edx
+	orl	%edx, %eax
+	movl	260(%ecx), %edx
+	orl	%edx, %eax
+	movl	264(%ecx), %edx
+	orl	%edx, %eax
+	movl	268(%ecx), %edx
+	orl	%edx, %eax
+	movl	272(%ecx), %edx
+	orl	%edx, %eax
+	movl	276(%ecx), %edx
+	orl	%edx, %eax
+	movl	280(%ecx), %edx
+	orl	%edx, %eax
+	movl	284(%ecx), %edx
+L247:
+	orl	%edx, %eax
+	movl	288(%ecx), %edx
+	orl	%edx, %eax
+	movl	292(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L123:
+	movl	4(%ecx), %edx
+	movl	40(%ecx), %eax
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	jmp	L246
+L122:
+	movl	(%ecx), %edx
+	movl	36(%ecx), %eax
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	jmp	L246
+L121:
+	movl	32(%ecx), %edx
+	movl	68(%ecx), %eax
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L244:
+	orl	%edx, %eax
+	movl	216(%ecx), %edx
+	orl	%edx, %eax
+	movl	220(%ecx), %edx
+	orl	%edx, %eax
+	movl	224(%ecx), %edx
+	orl	%edx, %eax
+	movl	228(%ecx), %edx
+	orl	%edx, %eax
+	movl	232(%ecx), %edx
+	orl	%edx, %eax
+	movl	236(%ecx), %edx
+	orl	%edx, %eax
+	movl	240(%ecx), %edx
+	orl	%edx, %eax
+	movl	244(%ecx), %edx
+	orl	%edx, %eax
+	movl	248(%ecx), %edx
+	jmp	L245
+L120:
+	movl	28(%ecx), %edx
+	movl	64(%ecx), %eax
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	jmp	L244
+L119:
+	movl	24(%ecx), %edx
+	movl	60(%ecx), %eax
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	jmp	L244
+L118:
+	movl	20(%ecx), %edx
+	movl	56(%ecx), %eax
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+L243:
+	orl	%edx, %eax
+	movl	216(%ecx), %edx
+	orl	%edx, %eax
+	movl	220(%ecx), %edx
+	orl	%edx, %eax
+	movl	224(%ecx), %edx
+	orl	%edx, %eax
+	movl	228(%ecx), %edx
+	orl	%edx, %eax
+	movl	232(%ecx), %edx
+	orl	%edx, %eax
+	movl	236(%ecx), %edx
+	orl	%edx, %eax
+	movl	240(%ecx), %edx
+	orl	%edx, %eax
+	movl	244(%ecx), %edx
+	orl	%edx, %eax
+	movl	248(%ecx), %edx
+	orl	%edx, %eax
+	movl	264(%ecx), %edx
+	orl	%edx, %eax
+	movl	268(%ecx), %edx
+	orl	%edx, %eax
+	movl	272(%ecx), %edx
+	jmp	L249
+L117:
+	movl	16(%ecx), %edx
+	movl	52(%ecx), %eax
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	jmp	L243
+L116:
+	movl	12(%ecx), %edx
+	movl	48(%ecx), %eax
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	jmp	L243
+L115:
+	movl	8(%ecx), %edx
+	movl	44(%ecx), %eax
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+L242:
+	orl	%edx, %eax
+	movl	216(%ecx), %edx
+	orl	%edx, %eax
+	movl	220(%ecx), %edx
+	orl	%edx, %eax
+	movl	224(%ecx), %edx
+	orl	%edx, %eax
+	movl	228(%ecx), %edx
+	orl	%edx, %eax
+	movl	232(%ecx), %edx
+	orl	%edx, %eax
+	movl	236(%ecx), %edx
+	orl	%edx, %eax
+	movl	240(%ecx), %edx
+	orl	%edx, %eax
+	movl	244(%ecx), %edx
+	orl	%edx, %eax
+	movl	248(%ecx), %edx
+	orl	%edx, %eax
+	movl	252(%ecx), %edx
+	orl	%edx, %eax
+	movl	256(%ecx), %edx
+	orl	%edx, %eax
+	movl	260(%ecx), %edx
+	jmp	L247
+L114:
+	movl	4(%ecx), %edx
+	movl	40(%ecx), %eax
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	jmp	L242
+L113:
+	movl	(%ecx), %edx
+	movl	36(%ecx), %eax
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	jmp	L242
+L112:
+	movl	32(%ecx), %edx
+	movl	68(%ecx), %eax
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+L240:
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+L241:
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+	orl	%edx, %eax
+	movl	248(%ecx), %edx
+	orl	%edx, %eax
+	movl	284(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L111:
+	movl	28(%ecx), %edx
+	movl	64(%ecx), %eax
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+L238:
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L239:
+	orl	%edx, %eax
+	movl	244(%ecx), %edx
+	orl	%edx, %eax
+	movl	280(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L110:
+	movl	24(%ecx), %edx
+	movl	60(%ecx), %eax
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+L236:
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L237:
+	orl	%edx, %eax
+	movl	240(%ecx), %edx
+	orl	%edx, %eax
+	movl	276(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L109:
+	movl	20(%ecx), %edx
+	movl	56(%ecx), %eax
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L235:
+	orl	%edx, %eax
+	movl	236(%ecx), %edx
+	orl	%edx, %eax
+	movl	272(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L108:
+	movl	16(%ecx), %edx
+	movl	52(%ecx), %eax
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L234:
+	orl	%edx, %eax
+	movl	232(%ecx), %edx
+	orl	%edx, %eax
+	movl	268(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L107:
+	movl	12(%ecx), %edx
+	movl	48(%ecx), %eax
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L233:
+	orl	%edx, %eax
+	movl	228(%ecx), %edx
+	orl	%edx, %eax
+	movl	264(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L106:
+	movl	8(%ecx), %edx
+	movl	44(%ecx), %eax
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L232:
+	orl	%edx, %eax
+	movl	224(%ecx), %edx
+	orl	%edx, %eax
+	movl	260(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L105:
+	movl	4(%ecx), %edx
+	movl	40(%ecx), %eax
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L231:
+	orl	%edx, %eax
+	movl	220(%ecx), %edx
+	orl	%edx, %eax
+	movl	256(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L104:
+	movl	(%ecx), %edx
+	movl	36(%ecx), %eax
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	orl	%edx, %eax
+	movl	212(%ecx), %edx
+L230:
+	orl	%edx, %eax
+	movl	216(%ecx), %edx
+	orl	%edx, %eax
+	movl	252(%ecx), %edx
+	orl	%edx, %eax
+	jmp	L56
+L103:
+	movl	32(%ecx), %edx
+	movl	68(%ecx), %eax
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+L229:
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	jmp	L240
+L102:
+	movl	28(%ecx), %edx
+	movl	64(%ecx), %eax
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+L228:
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	jmp	L238
+L101:
+	movl	24(%ecx), %edx
+	movl	60(%ecx), %eax
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+L227:
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	jmp	L236
+L100:
+	movl	20(%ecx), %edx
+	movl	56(%ecx), %eax
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+L226:
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+L214:
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	jmp	L235
+L99:
+	movl	16(%ecx), %edx
+	movl	52(%ecx), %eax
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+L225:
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	jmp	L234
+L98:
+	movl	12(%ecx), %edx
+	movl	48(%ecx), %eax
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+L224:
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	orl	%edx, %eax
+	movl	200(%ecx), %edx
+	jmp	L233
+L97:
+	movl	8(%ecx), %edx
+	movl	44(%ecx), %eax
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+L223:
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+L207:
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	jmp	L232
+L96:
+	movl	4(%ecx), %edx
+	movl	40(%ecx), %eax
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+L222:
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	jmp	L231
+L95:
+	movl	(%ecx), %edx
+	movl	36(%ecx), %eax
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+L221:
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	orl	%edx, %eax
+	movl	188(%ecx), %edx
+	jmp	L230
+L94:
+	movl	32(%ecx), %edx
+	movl	68(%ecx), %eax
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	jmp	L229
+L93:
+	movl	28(%ecx), %edx
+	movl	64(%ecx), %eax
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	jmp	L228
+L92:
+	movl	24(%ecx), %edx
+	movl	60(%ecx), %eax
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	jmp	L227
+L91:
+	movl	20(%ecx), %edx
+	movl	56(%ecx), %eax
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	jmp	L226
+L90:
+	movl	16(%ecx), %edx
+	movl	52(%ecx), %eax
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	jmp	L225
+L89:
+	movl	12(%ecx), %edx
+	movl	48(%ecx), %eax
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	jmp	L224
+L88:
+	movl	8(%ecx), %edx
+	movl	44(%ecx), %eax
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	jmp	L223
+L87:
+	movl	4(%ecx), %edx
+	movl	40(%ecx), %eax
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	jmp	L222
+L86:
+	movl	(%ecx), %edx
+	movl	36(%ecx), %eax
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	jmp	L221
+L85:
+	movl	24(%ecx), %edx
+	movl	28(%ecx), %eax
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+L220:
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	140(%ecx), %edx
+	orl	%edx, %eax
+	movl	176(%ecx), %edx
+	jmp	L241
+L84:
+	movl	24(%ecx), %edx
+	movl	28(%ecx), %eax
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+L218:
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	136(%ecx), %edx
+	orl	%edx, %eax
+	movl	172(%ecx), %edx
+	orl	%edx, %eax
+	movl	208(%ecx), %edx
+	jmp	L239
+L83:
+	movl	24(%ecx), %edx
+	movl	28(%ecx), %eax
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+L216:
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+	orl	%edx, %eax
+	movl	132(%ecx), %edx
+	orl	%edx, %eax
+	movl	168(%ecx), %edx
+	orl	%edx, %eax
+	movl	204(%ecx), %edx
+	jmp	L237
+L82:
+	movl	12(%ecx), %edx
+	movl	16(%ecx), %eax
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+L213:
+	orl	%edx, %eax
+	movl	128(%ecx), %edx
+	orl	%edx, %eax
+	movl	164(%ecx), %edx
+	jmp	L214
+L81:
+	movl	12(%ecx), %edx
+	movl	16(%ecx), %eax
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+L211:
+	orl	%edx, %eax
+	movl	124(%ecx), %edx
+	orl	%edx, %eax
+	movl	160(%ecx), %edx
+	orl	%edx, %eax
+	movl	196(%ecx), %edx
+	jmp	L234
+L80:
+	movl	12(%ecx), %edx
+	movl	16(%ecx), %eax
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+L209:
+	orl	%edx, %eax
+	movl	120(%ecx), %edx
+	orl	%edx, %eax
+	movl	156(%ecx), %edx
+	orl	%edx, %eax
+	movl	192(%ecx), %edx
+	jmp	L233
+L79:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+L206:
+	orl	%edx, %eax
+	movl	116(%ecx), %edx
+	orl	%edx, %eax
+	movl	152(%ecx), %edx
+	jmp	L207
+L78:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+L204:
+	orl	%edx, %eax
+	movl	112(%ecx), %edx
+	orl	%edx, %eax
+	movl	148(%ecx), %edx
+	orl	%edx, %eax
+	movl	184(%ecx), %edx
+	jmp	L231
+L77:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	orl	%edx, %eax
+	movl	96(%ecx), %edx
+	orl	%edx, %eax
+	movl	100(%ecx), %edx
+	orl	%edx, %eax
+	movl	104(%ecx), %edx
+L202:
+	orl	%edx, %eax
+	movl	108(%ecx), %edx
+	orl	%edx, %eax
+	movl	144(%ecx), %edx
+	orl	%edx, %eax
+	movl	180(%ecx), %edx
+	jmp	L230
+L76:
+	movl	24(%ecx), %edx
+	movl	28(%ecx), %eax
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+L219:
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+	jmp	L220
+L75:
+	movl	24(%ecx), %edx
+	movl	28(%ecx), %eax
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+L217:
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+	jmp	L218
+L74:
+	movl	24(%ecx), %edx
+	movl	28(%ecx), %eax
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+L215:
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+	jmp	L216
+L73:
+	movl	12(%ecx), %edx
+	movl	16(%ecx), %eax
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+L212:
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	jmp	L213
+L72:
+	movl	12(%ecx), %edx
+	movl	16(%ecx), %eax
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+L210:
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	jmp	L211
+L71:
+	movl	12(%ecx), %edx
+	movl	16(%ecx), %eax
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+L208:
+	orl	%edx, %eax
+	movl	84(%ecx), %edx
+	orl	%edx, %eax
+	movl	88(%ecx), %edx
+	orl	%edx, %eax
+	movl	92(%ecx), %edx
+	jmp	L209
+L70:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+L205:
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	jmp	L206
+L69:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+L203:
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	jmp	L204
+L68:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	orl	%edx, %eax
+	movl	60(%ecx), %edx
+	orl	%edx, %eax
+	movl	64(%ecx), %edx
+	orl	%edx, %eax
+	movl	68(%ecx), %edx
+L201:
+	orl	%edx, %eax
+	movl	72(%ecx), %edx
+	orl	%edx, %eax
+	movl	76(%ecx), %edx
+	orl	%edx, %eax
+	movl	80(%ecx), %edx
+	jmp	L202
+L67:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	jmp	L219
+L66:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	jmp	L217
+L65:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	jmp	L215
+L64:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	jmp	L212
+L63:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	jmp	L210
+L62:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	48(%ecx), %edx
+	orl	%edx, %eax
+	movl	52(%ecx), %edx
+	orl	%edx, %eax
+	movl	56(%ecx), %edx
+	jmp	L208
+L61:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	jmp	L205
+L60:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	jmp	L203
+L59:
+	movl	(%ecx), %edx
+	movl	4(%ecx), %eax
+	orl	%edx, %eax
+	movl	8(%ecx), %edx
+	orl	%edx, %eax
+	movl	12(%ecx), %edx
+	orl	%edx, %eax
+	movl	16(%ecx), %edx
+	orl	%edx, %eax
+	movl	20(%ecx), %edx
+	orl	%edx, %eax
+	movl	24(%ecx), %edx
+	orl	%edx, %eax
+	movl	28(%ecx), %edx
+	orl	%edx, %eax
+	movl	32(%ecx), %edx
+	orl	%edx, %eax
+	movl	36(%ecx), %edx
+	orl	%edx, %eax
+	movl	40(%ecx), %edx
+	orl	%edx, %eax
+	movl	44(%ecx), %edx
+	jmp	L201
 	.align 2
+	.p2align 4,,15
 .globl __ZN11SolveSudoku4initERK5Board
 	.def	__ZN11SolveSudoku4initERK5Board;	.scl	2;	.type	32;	.endef
 __ZN11SolveSudoku4initERK5Board:
@@ -1563,66 +2534,69 @@ __ZN11SolveSudoku4initERK5Board:
 	pushl	%edi
 	pushl	%esi
 	pushl	%ebx
+	subl	$12, %esp
 	xorl	%ebx, %ebx
-	pushl	%edi
-	pushl	%edi
-	movl	8(%ebp), %edi
 	movl	12(%ebp), %eax
-	pushl	%edi
+	movl	8(%ebp), %edi
 	movl	%eax, -16(%ebp)
+	movl	%edi, (%esp)
 	call	__ZN11SolveSudoku9initTableEv
-	popl	%esi
-L204:
+	.p2align 4,,15
+L261:
 	movl	$0, (%edi,%ebx,4)
 	incl	%ebx
 	cmpl	$80, %ebx
-	jle	L204
+	jle	L261
 	xorl	%ebx, %ebx
-L211:
-	movl	$9, %edx
-	movl	%ebx, %eax
-	movl	%edx, %ecx
-	cltd
-	xorl	%esi, %esi
-	idivl	%ecx
-	movl	%eax, -20(%ebp)
-	imull	$9, %eax, %eax
-	addl	%edx, %eax
-	movl	-16(%ebp), %edx
-	movzbl	(%eax,%edx), %eax
-	testl	%eax, %eax
-	jle	L208
-	cmpl	$9, %eax
-	jle	L209
-	movl	$2, %eax
-	jmp	L200
-L209:
-	pushl	%ebx
+	jmp	L268
+	.p2align 4,,7
+L266:
+	movl	%ebx, 4(%esp)
 	leal	-1(%eax), %ecx
 	movl	$1, %esi
-	pushl	%edi
+	movl	%edi, (%esp)
 	sall	%cl, %esi
 	call	__ZNK11SolveSudoku9checkCellEi
-	popl	%edx
 	testl	%esi, %eax
-	popl	%ecx
-	je	L208
-	movl	$1, %eax
-	jmp	L200
-L208:
+	jne	L273
+L265:
 	movl	%esi, (%edi,%ebx,4)
 	incl	%ebx
 	cmpl	$80, %ebx
-	jle	L211
+	jg	L274
+L268:
+	movl	-16(%ebp), %edx
+	xorl	%esi, %esi
+	movzbl	(%ebx,%edx), %eax
+	testl	%eax, %eax
+	jle	L265
+	cmpl	$9, %eax
+	jle	L266
+	addl	$12, %esp
+	movl	$2, %eax
+	popl	%ebx
+	popl	%esi
+	popl	%edi
+	popl	%ebp
+	ret
+L273:
+	addl	$12, %esp
+	movl	$1, %eax
+	popl	%ebx
+	popl	%esi
+	popl	%edi
+	popl	%ebp
+	ret
+L274:
+	addl	$12, %esp
 	xorl	%eax, %eax
-L200:
-	leal	-12(%ebp), %esp
 	popl	%ebx
 	popl	%esi
 	popl	%edi
 	popl	%ebp
 	ret
 	.section .rdata,"dr"
+	.align 4
 LC1:
 	.ascii "FlagsType SolveSudoku::checkCell(int i) const\0"
 LC2:
@@ -1639,10 +2613,6 @@ LC7:
 	.ascii "                    \0"
 LC8:
 	.ascii "board[%2d]\0"
-LC9:
-	.ascii " | \0"
-LC10:
-	.ascii " |\0"
 LC11:
 	.ascii ";\12\0"
 LC12:
@@ -1651,10 +2621,13 @@ LC13:
 	.ascii "        return 0; /* dummy */\0"
 LC14:
 	.ascii "    } else {\0"
+	.align 4
 LC15:
 	.ascii "        FlagsType flags = (FlagsType) 0;\0"
+	.align 4
 LC16:
 	.ascii "        for (int j = 0; j < (BoardSize - 1) * 3 - (BoardSizeSub - 1) * 2; j++)\0"
+	.align 4
 LC17:
 	.ascii "            flags |= board[table[i][j]];\0"
 LC18:
@@ -1663,8 +2636,13 @@ LC19:
 	.ascii "    }\0"
 LC20:
 	.ascii "}\0"
+LC9:
+	.ascii " | \0"
+LC10:
+	.ascii " |\0"
 	.text
 	.align 2
+	.p2align 4,,15
 .globl __ZN11SolveSudoku13makeCheckCellEv
 	.def	__ZN11SolveSudoku13makeCheckCellEv;	.scl	2;	.type	32;	.endef
 __ZN11SolveSudoku13makeCheckCellEv:
@@ -1673,352 +2651,363 @@ __ZN11SolveSudoku13makeCheckCellEv:
 	pushl	%edi
 	pushl	%esi
 	pushl	%ebx
-	subl	$12, %esp
+	subl	$28, %esp
 	movl	8(%ebp), %eax
 	movl	%eax, -16(%ebp)
-	pushl	%eax
+	movl	%eax, (%esp)
 	call	__ZN11SolveSudoku9initTableEv
-	pushl	$LC1
+	movl	$LC1, (%esp)
 	call	_puts
-	pushl	$LC2
+	movl	$LC2, (%esp)
 	call	_puts
-	pushl	$LC3
+	movl	$LC3, (%esp)
 	call	_puts
-	pushl	$LC4
+	movl	$LC4, (%esp)
 	call	_puts
 	movl	$0, -20(%ebp)
-	addl	$20, %esp
-	movl	$0, -24(%ebp)
-L231:
-	pushl	-20(%ebp)
-	pushl	$LC5
-	call	_printf
-	popl	%esi
-	xorl	%esi, %esi
-	popl	%edi
+	movl	$0, -28(%ebp)
+L290:
+	movl	-20(%ebp), %edx
 	xorl	%edi, %edi
-	pushl	$LC6
+	movl	$LC5, (%esp)
+	movl	%edx, 4(%esp)
 	call	_printf
-	popl	%ebx
-L230:
-	testl	%esi, %esi
-	jle	L223
-	pushl	$LC7
+	movl	$LC6, (%esp)
 	call	_printf
-	popl	%ecx
-L223:
+	movl	$0, -24(%ebp)
+	.p2align 4,,15
+L289:
+	testl	%edi, %edi
+	jle	L282
+	movl	$LC7, (%esp)
+	call	_printf
+L282:
+	movl	-24(%ebp), %esi
 	xorl	%ebx, %ebx
-L228:
-	movl	-24(%ebp), %edx
-	leal	(%edi,%edx), %eax
+	movl	-28(%ebp), %ecx
+	addl	%ecx, %esi
+	.p2align 4,,15
+L287:
 	movl	-16(%ebp), %edx
-	addl	%ebx, %eax
-	pushl	324(%edx,%eax,4)
-	pushl	$LC8
+	leal	(%esi,%ebx), %eax
+	movl	324(%edx,%eax,4), %eax
+	movl	$LC8, (%esp)
+	movl	%eax, 4(%esp)
 	call	_printf
-	popl	%eax
 	cmpl	$3, %ebx
-	popl	%edx
-	jg	L226
-	pushl	$LC9
-	call	_printf
-	popl	%eax
-L226:
+	jle	L297
+L285:
 	incl	%ebx
 	cmpl	$4, %ebx
-	jle	L228
-	cmpl	$2, %esi
-	jg	L222
-	pushl	$LC10
+	jle	L287
+	cmpl	$2, %edi
+	jle	L298
+L281:
+	addl	$5, -24(%ebp)
+	incl	%edi
+	cmpl	$3, %edi
+	jle	L289
+	movl	$LC11, (%esp)
 	call	_puts
-	popl	%eax
-L222:
-	incl	%esi
-	addl	$5, %edi
-	cmpl	$3, %esi
-	jle	L230
-	pushl	$LC11
-	call	_puts
-	popl	%eax
 	incl	-20(%ebp)
-	addl	$20, -24(%ebp)
+	addl	$20, -28(%ebp)
 	cmpl	$80, -20(%ebp)
-	jle	L231
-	pushl	$LC12
+	jle	L290
+	movl	$LC12, (%esp)
 	call	_puts
-	pushl	$LC13
+	movl	$LC13, (%esp)
 	call	_puts
-	pushl	$LC14
+	movl	$LC14, (%esp)
 	call	_puts
-	pushl	$LC15
+	movl	$LC15, (%esp)
 	call	_puts
-	pushl	$LC16
+	movl	$LC16, (%esp)
 	call	_puts
-	pushl	$LC17
+	movl	$LC17, (%esp)
 	call	_puts
-	pushl	$LC18
+	movl	$LC18, (%esp)
 	call	_puts
-	pushl	$LC19
+	movl	$LC19, (%esp)
 	call	_puts
 	movl	$LC20, 8(%ebp)
-	addl	$32, %esp
-	leal	-12(%ebp), %esp
+	addl	$28, %esp
 	popl	%ebx
 	popl	%esi
 	popl	%edi
 	popl	%ebp
 	jmp	_puts
+	.p2align 4,,7
+L297:
+	movl	$LC9, (%esp)
+	call	_printf
+	jmp	L285
+L298:
+	movl	$LC10, (%esp)
+	call	_puts
+	jmp	L281
 	.align 2
+	.p2align 4,,15
 .globl __ZNK11SolveSudoku7intLog2Ei
 	.def	__ZNK11SolveSudoku7intLog2Ei;	.scl	2;	.type	32;	.endef
 __ZNK11SolveSudoku7intLog2Ei:
 	pushl	%ebp
 	xorl	%ecx, %ecx
 	movl	%esp, %ebp
-	movl	12(%ebp), %edx
-	cmpl	$1, %edx
-L245:
-	jle	L244
+	pushl	%ebx
+	movl	12(%ebp), %ebx
+	cmpl	$1, %ebx
+	jle	L305
+	movl	$1, %edx
+	.p2align 4,,15
+L303:
 	incl	%ecx
-	movl	$1, %eax
+	movl	%edx, %eax
 	sall	%cl, %eax
-	cmpl	%eax, %edx
-	jmp	L245
-L244:
-	popl	%ebp
+	cmpl	%ebx, %eax
+	jl	L303
+L305:
+	popl	%ebx
 	movl	%ecx, %eax
+	popl	%ebp
 	ret
 	.align 2
+	.p2align 4,,15
 .globl __ZN11SolveSudoku11storeResultEv
 	.def	__ZN11SolveSudoku11storeResultEv;	.scl	2;	.type	32;	.endef
 __ZN11SolveSudoku11storeResultEv:
 	pushl	%ebp
 	movl	%esp, %ebp
 	pushl	%edi
+	xorl	%edi, %edi
 	pushl	%esi
-	xorl	%esi, %esi
 	pushl	%ebx
-	pushl	%ecx
+	subl	$12, %esp
 	movl	8(%ebp), %eax
 	movl	%eax, -16(%ebp)
-L250:
-	movl	%esi, %eax
-	movl	$9, %edx
-	movl	-16(%ebp), %ecx
-	movl	%edx, %edi
-	cltd
-	idivl	%edi
-	imull	$9, %eax, %eax
-	imull	$81, 6804(%ecx), %ebx
-	movl	-16(%ebp), %ecx
-	addl	6812(%ecx), %eax
-	pushl	(%ecx,%esi,4)
-	incl	%esi
-	leal	(%eax,%edx), %edi
-	pushl	%ecx
+	.p2align 4,,15
+L310:
+	movl	-16(%ebp), %edx
+	movl	6804(%edx), %ebx
+	movl	6812(%edx), %esi
+	movl	(%edx,%edi,4), %eax
+	leal	(%ebx,%ebx,8), %ebx
+	addl	%edi, %esi
+	movl	%eax, 4(%esp)
+	incl	%edi
+	leal	(%ebx,%ebx,8), %ebx
+	movl	%edx, (%esp)
 	call	__ZNK11SolveSudoku7intLog2Ei
 	incb	%al
-	cmpl	$80, %esi
-	movb	%al, (%edi,%ebx)
-	popl	%eax
-	popl	%edx
-	jle	L250
-	leal	-12(%ebp), %esp
+	cmpl	$80, %edi
+	movb	%al, (%esi,%ebx)
+	jle	L310
+	addl	$12, %esp
 	popl	%ebx
 	popl	%esi
 	popl	%edi
 	popl	%ebp
 	ret
 	.align 2
+	.p2align 4,,15
 .globl __ZN11SolveSudoku5countEi
 	.def	__ZN11SolveSudoku5countEi;	.scl	2;	.type	32;	.endef
 __ZN11SolveSudoku5countEi:
 	pushl	%ebp
 	movl	%esp, %ebp
-	pushl	%edi
-	movl	8(%ebp), %edi
-	pushl	%esi
-	pushl	%ebx
+	subl	$24, %esp
+	movl	%ebx, -12(%ebp)
 	movl	12(%ebp), %ebx
-L286:
+	movl	%esi, -8(%ebp)
+	movl	8(%ebp), %esi
 	cmpl	$80, %ebx
-	jg	L283
-	cmpl	$0, (%edi,%ebx,4)
-	je	L255
+	movl	%edi, -4(%ebp)
+	jg	L343
+	.p2align 4,,15
+L347:
+	movl	(%esi,%ebx,4), %edi
+	testl	%edi, %edi
+	je	L315
 	incl	%ebx
-	jmp	L286
-L255:
 	cmpl	$80, %ebx
-	jle	L257
-L283:
-	cmpl	$0, 6804(%edi)
-	js	L258
-	pushl	%edi
+	jle	L347
+L343:
+	movl	6804(%esi), %eax
+	testl	%eax, %eax
+	js	L318
+	movl	%esi, (%esp)
 	call	__ZN11SolveSudoku11storeResultEv
-	popl	%ebx
-L258:
-	movl	6804(%edi), %eax
+	movl	6804(%esi), %eax
+L318:
 	incl	%eax
-	cmpl	6808(%edi), %eax
-	movl	%eax, 6804(%edi)
-	jl	L253
-L260:
-	pushl	$4
-	call	___cxa_allocate_exception
-	movl	$1, (%eax)
-	movl	$0, (%esp)
-	pushl	$__ZTIi
-	pushl	%eax
-	call	___cxa_throw
-L257:
-	pushl	%ebx
-	pushl	%edi
-	call	__ZNK11SolveSudoku9checkCellEi
-	popl	%edx
-	movl	%eax, %esi
-	xorl	$511, %esi
-	popl	%ecx
-	je	L253
-	leal	-1(%esi), %eax
-	testl	%eax, %esi
-	jne	L263
-	movl	%esi, (%edi,%ebx,4)
-	jmp	L285
-L263:
-	testl	$1, %esi
-	je	L267
-	movl	$1, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%ecx
-	popl	%eax
-L267:
-	testl	$2, %esi
-	je	L268
-	movl	$2, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%eax
-	popl	%edx
-L268:
-	testl	$4, %esi
-	je	L269
-	movl	$4, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%ecx
-	popl	%eax
-L269:
-	testl	$8, %esi
-	je	L270
-	movl	$8, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%eax
-	popl	%edx
-L270:
-	testl	$16, %esi
-	je	L271
-	movl	$16, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%ecx
-	popl	%eax
-L271:
-	testl	$32, %esi
-	je	L272
-	movl	$32, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%eax
-	popl	%edx
-L272:
-	testl	$64, %esi
-	je	L273
-	movl	$64, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%ecx
-	popl	%eax
-L273:
-	testl	$128, %esi
-	je	L274
-	movl	$128, (%edi,%ebx,4)
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%eax
-	popl	%edx
-L274:
-	andl	$256, %esi
-	je	L265
-	movl	$256, (%edi,%ebx,4)
-L285:
-	leal	1(%ebx), %eax
-	pushl	%eax
-	pushl	%edi
-	call	__ZN11SolveSudoku5countEi
-	popl	%esi
-	popl	%eax
-L265:
-	movl	$0, (%edi,%ebx,4)
-L253:
-	leal	-12(%ebp), %esp
-	popl	%ebx
-	popl	%esi
-	popl	%edi
+	cmpl	6808(%esi), %eax
+	movl	%eax, 6804(%esi)
+	jge	L348
+L313:
+	movl	-12(%ebp), %ebx
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
 	popl	%ebp
 	ret
+	.p2align 4,,7
+L315:
+	cmpl	$80, %ebx
+	jg	L343
+	movl	%ebx, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZNK11SolveSudoku9checkCellEi
+	movl	%eax, %edi
+	xorl	$511, %edi
+	je	L313
+	leal	-1(%edi), %eax
+	testl	%edi, %eax
+	je	L349
+	testl	$1, %edi
+	jne	L350
+L327:
+	testl	$2, %edi
+	jne	L351
+L328:
+	testl	$4, %edi
+	jne	L352
+L329:
+	testl	$8, %edi
+	jne	L353
+L330:
+	testl	$16, %edi
+	jne	L354
+L331:
+	testl	$32, %edi
+	jne	L355
+L332:
+	testl	$64, %edi
+	jne	L356
+L333:
+	testl	$128, %edi
+	jne	L357
+L334:
+	andl	$256, %edi
+	jne	L358
+L325:
+	movl	$0, (%esi,%ebx,4)
+	movl	-12(%ebp), %ebx
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+L349:
+	movl	%edi, (%esi,%ebx,4)
+L345:
+	movl	%esi, (%esp)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L325
+L358:
+	movl	$256, (%esi,%ebx,4)
+	jmp	L345
+L357:
+	movl	$128, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L334
+L356:
+	movl	$64, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L333
+L355:
+	movl	$32, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L332
+L354:
+	movl	$16, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L331
+L353:
+	movl	$8, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L330
+L352:
+	movl	$4, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L329
+L351:
+	movl	$2, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L328
+L350:
+	movl	$1, (%esi,%ebx,4)
+	leal	1(%ebx), %eax
+	movl	%eax, 4(%esp)
+	movl	%esi, (%esp)
+	call	__ZN11SolveSudoku5countEi
+	jmp	L327
+L348:
+L320:
+	movl	$4, (%esp)
+	xorl	%esi, %esi
+	movl	$__ZTIi, %ebx
+	call	___cxa_allocate_exception
+	movl	$1, (%eax)
+	movl	%esi, 8(%esp)
+	movl	%ebx, 4(%esp)
+	movl	%eax, (%esp)
+	call	___cxa_throw
 	.def	__Unwind_SjLj_Resume;	.scl	2;	.type	32;	.endef
 	.def	___gxx_personality_sj0;	.scl	2;	.type	32;	.endef
 	.def	__Unwind_SjLj_Register;	.scl	2;	.type	32;	.endef
 	.def	__Unwind_SjLj_Unregister;	.scl	2;	.type	32;	.endef
 	.align 2
+	.p2align 4,,15
 .globl __ZN11SolveSudoku5solveEP5Boardii
 	.def	__ZN11SolveSudoku5solveEP5Boardii;	.scl	2;	.type	32;	.endef
 __ZN11SolveSudoku5solveEP5Boardii:
 	pushl	%ebp
 	movl	%esp, %ebp
-	leal	-12(%ebp), %edx
-	pushl	%edi
-	pushl	%esi
-	pushl	%ebx
-	subl	$64, %esp
-	movl	8(%ebp), %eax
+	subl	$104, %esp
 	movl	%esp, -24(%ebp)
-	movl	$___gxx_personality_sj0, -40(%ebp)
+	movl	8(%ebp), %eax
+	leal	-12(%ebp), %edx
+	movl	%ebx, -12(%ebp)
+	movl	%esi, -8(%ebp)
 	movl	%eax, -68(%ebp)
 	leal	-64(%ebp), %eax
-	pushl	%eax
+	movl	%edi, -4(%ebp)
+	movl	$___gxx_personality_sj0, -40(%ebp)
 	movl	$LLSDA28, -36(%ebp)
 	movl	%edx, -32(%ebp)
-	movl	$L300, -28(%ebp)
+	movl	$L372, -28(%ebp)
+	movl	%eax, (%esp)
 	call	__Unwind_SjLj_Register
 	cmpl	$-1, 16(%ebp)
-	popl	%ecx
-	jne	L288
-	movl	$2147483647, 16(%ebp)
-L288:
+	je	L374
+L360:
 	cmpl	$-1, 20(%ebp)
-	jne	L289
-	movl	$2147483647, 20(%ebp)
-L289:
+	je	L375
+L361:
 	movl	20(%ebp), %eax
+	xorl	%ebx, %ebx
 	movl	-68(%ebp), %edx
 	negl	%eax
 	movl	%eax, 6804(%edx)
@@ -2026,66 +3015,76 @@ L289:
 	movl	%eax, 6808(%edx)
 	movl	12(%ebp), %eax
 	movl	%eax, 6812(%edx)
-	pushl	$0
-	pushl	%edx
+	movl	%ebx, 4(%esp)
+	movl	%edx, (%esp)
 	movl	$2, -60(%ebp)
 	call	__ZN11SolveSudoku5countEi
-	popl	%eax
-	popl	%edx
-	jmp	L290
-L299:
-	decl	%eax
-	jne	L301
-L291:
-	pushl	-72(%ebp)
-	call	___cxa_begin_catch
-	popl	%edi
-	movl	(%eax), %eax
-	movl	%eax, -76(%ebp)
-	decl	%eax
-	je	L296
-L293:
-	pushl	$4
-	call	___cxa_allocate_exception
-	movl	-76(%ebp), %edx
-	movl	%edx, (%eax)
-	movl	$0, (%esp)
-	pushl	$__ZTIi
-	pushl	%eax
-	movl	$1, -60(%ebp)
-	call	___cxa_throw
-L300:
+L362:
+L359:
+	movl	-68(%ebp), %eax
+	movl	6804(%eax), %eax
+	addl	%eax, 20(%ebp)
+	leal	-64(%ebp), %eax
+	movl	%eax, (%esp)
+	call	__Unwind_SjLj_Unregister
+	movl	20(%ebp), %eax
+	movl	-12(%ebp), %ebx
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.p2align 4,,7
+L372:
 	addl	$12, %ebp
 	cmpl	$1, -60(%ebp)
 	movl	-56(%ebp), %eax
 	movl	%eax, -72(%ebp)
 	movl	-52(%ebp), %eax
-	je	L299
-L295:
+	je	L371
+L367:
 	call	___cxa_end_catch
-L301:
-L297:
-	pushl	-72(%ebp)
+L373:
+L369:
 	movl	$-1, -60(%ebp)
+	movl	-72(%ebp), %edx
+	movl	%edx, (%esp)
 	call	__Unwind_SjLj_Resume
-L296:
+	.p2align 4,,7
+L375:
+	movl	$2147483647, 20(%ebp)
+	jmp	L361
+	.p2align 4,,7
+L374:
+	movl	$2147483647, 16(%ebp)
+	jmp	L360
+	.p2align 4,,7
+L371:
+	decl	%eax
+	jne	L373
+L363:
+	movl	-72(%ebp), %eax
+	movl	%eax, (%esp)
+	call	___cxa_begin_catch
+	movl	(%eax), %eax
+	movl	%eax, -76(%ebp)
+	decl	%eax
+	jne	L376
 	call	___cxa_end_catch
-L290:
-L287:
-	movl	-68(%ebp), %edx
-	leal	-64(%ebp), %eax
-	movl	6804(%edx), %edx
-	pushl	%eax
-	addl	%edx, 20(%ebp)
-	call	__Unwind_SjLj_Unregister
-	popl	%esi
-	movl	20(%ebp), %eax
-	leal	-12(%ebp), %esp
-	popl	%ebx
-	popl	%esi
-	popl	%edi
-	popl	%ebp
-	ret
+	jmp	L362
+L376:
+L365:
+	movl	$4, (%esp)
+	call	___cxa_allocate_exception
+	movl	-76(%ebp), %edx
+	xorl	%ecx, %ecx
+	movl	%edx, (%eax)
+	movl	$__ZTIi, %edx
+	movl	%ecx, 8(%esp)
+	movl	%edx, 4(%esp)
+	movl	%eax, (%esp)
+	movl	$1, -60(%ebp)
+	call	___cxa_throw
 	.section	.gcc_except_table,"dr"
 	.align 4
 LLSDA28:
@@ -2110,279 +3109,304 @@ LLSDATT28:
 	.section .rdata,"dr"
 LC21:
 	.ascii "r\0"
-LC22:
-	.ascii "fopen error: %s\12\0"
-LC24:
-	.ascii "LF error: %s\12\0"
-LC26:
-	.ascii "quiz error: %s\12\0"
 LC28:
 	.ascii "\0"
-LC23:
-	.ascii "load error: %s\12\0"
-LC25:
-	.ascii "charactor error: %s (buf[%d]=0x%02X)\12\0"
-LC29:
-	.ascii "(or over)\0"
 LC30:
 	.ascii "n=%d%s (%.3f[sec])\12\0"
 LC31:
 	.ascii "\12ans[%d]:\12\0"
+LC24:
+	.ascii "LF error: %s\12\0"
+LC29:
+	.ascii "(or over)\0"
+LC22:
+	.ascii "fopen error: %s\12\0"
+LC26:
+	.ascii "quiz error: %s\12\0"
+LC23:
+	.ascii "load error: %s\12\0"
+	.align 4
+LC25:
+	.ascii "charactor error: %s (buf[%d]=0x%02X)\12\0"
 	.align 4
 LC27:
 	.long	1148846080
 	.text
 	.align 2
+	.p2align 4,,15
 .globl __Z6solverPKci
 	.def	__Z6solverPKci;	.scl	2;	.type	32;	.endef
 __Z6solverPKci:
 	pushl	%ebp
-	movl	$8364, %eax
+	movl	$8396, %eax
 	movl	%esp, %ebp
 	pushl	%edi
 	pushl	%esi
 	pushl	%ebx
 	call	__alloca
-	pushl	$LC21
 	movl	8(%ebp), %edi
-	pushl	%edi
+	movl	$LC21, %ebx
+	movl	%ebx, 4(%esp)
+	movl	%edi, (%esp)
 	call	_fopen
+	testl	%eax, %eax
 	movl	%eax, %esi
-	testl	%esi, %esi
-	popl	%eax
-	popl	%edx
-	jne	L303
-	pushl	%edi
-	pushl	$LC22
-	jmp	L330
-L303:
-	pushl	%esi
-	leal	-1036(%ebp), %eax
-	pushl	$1022
-	pushl	$1
-	pushl	%eax
+	je	L408
+	movl	%eax, 12(%esp)
+	movl	$1, %eax
+	movl	$1022, %edx
+	movl	%eax, 4(%esp)
+	leal	-1048(%ebp), %eax
+	movl	%edx, 8(%esp)
+	movl	%eax, (%esp)
 	call	_fread
-	pushl	%esi
+	movl	%esi, (%esp)
 	movl	%eax, %ebx
 	xorl	%esi, %esi
 	call	_fclose
-	movb	$0, -1036(%ebx,%ebp)
-	addl	$20, %esp
+	xorl	%eax, %eax
+	movb	%al, -1048(%ebx,%ebp)
 	xorl	%ebx, %ebx
-L314:
-	movzbl	-1036(%ebx,%ebp), %edx
+	.p2align 4,,15
+L389:
+	movzbl	-1048(%ebx,%ebp), %edx
 	testb	%dl, %dl
-	je	L327
+	je	L402
 	cmpb	$10, %dl
-	jne	L308
-	movl	$9, %edx
-	movl	%esi, %eax
-	movl	%edx, %ecx
-	cltd
-	idivl	%ecx
-	testl	%edx, %edx
-	je	L306
-	pushl	%edi
-	pushl	$LC24
-L330:
-	movl	__imp___iob, %eax
-	addl	$64, %eax
-	pushl	%eax
-	call	_fprintf
-	jmp	L329
-L308:
+	je	L409
 	cmpb	$32, %dl
-	je	L306
+	je	L381
 	movb	%dl, %al
+	xorl	%ecx, %ecx
 	subb	$45, %al
 	cmpb	$1, %al
-	seta	%al
-	movzbl	%al, %eax
-	negl	%eax
-	movl	%eax, -8376(%ebp)
 	movb	%dl, %al
+	seta	%cl
 	subb	$49, %al
+	negl	%ecx
 	cmpb	$8, %al
-	ja	L312
+	ja	L387
 	movsbl	%dl,%eax
-	subl	$48, %eax
-	movl	%eax, -8376(%ebp)
-L312:
-	cmpl	$0, -8376(%ebp)
-	js	L328
-	movl	%esi, %eax
-	movl	$9, %ecx
-	cltd
-	idivl	%ecx
+	leal	-48(%eax), %ecx
+L387:
+	testl	%ecx, %ecx
+	js	L403
+	movb	%cl, -7960(%esi,%ebp)
 	incl	%esi
-	movl	%eax, -8368(%ebp)
-	imull	$9, %eax, %eax
-	addl	%edx, %eax
-	movzbl	-8376(%ebp), %edx
-	movb	%dl, -7948(%ebp,%eax)
-L306:
+L381:
 	incl	%ebx
 	cmpl	$80, %esi
-	jle	L314
-	leal	-7948(%ebp), %eax
-	leal	-7852(%ebp), %ebx
-	pushl	%eax
-	pushl	%ebx
+	jle	L389
+	leal	-7960(%ebp), %eax
+	leal	-7864(%ebp), %ebx
+	movl	%eax, 4(%esp)
+	movl	%ebx, (%esp)
 	call	__ZN11SolveSudoku4initERK5Board
-	popl	%ecx
 	testl	%eax, %eax
-	popl	%esi
-	je	L315
-	pushl	%edi
-	pushl	$LC26
-	jmp	L330
-L315:
-	cmpl	$0, 12(%ebp)
-	jns	L316
-	movl	$2147483642, 12(%ebp)
-L316:
-	pushl	12(%ebp)
-	leal	-8364(%ebp), %eax
-	pushl	$5
-	pushl	%eax
-	pushl	%ebx
+	jne	L410
+	movl	12(%ebp), %eax
+	testl	%eax, %eax
+	js	L411
+L391:
+	movl	12(%ebp), %eax
+	leal	-8376(%ebp), %esi
+	movl	%esi, 4(%esp)
+	movl	%ebx, (%esp)
+	movl	%eax, 12(%esp)
+	movl	$5, %eax
+	movl	%eax, 8(%esp)
 	call	__ZN11SolveSudoku5solveEP5Boardii
-	addl	$16, %esp
 	movl	%eax, %edi
 	call	_clock
 	pushl	%eax
-	movl	12(%ebp), %eax
 	movl	$LC28, %edx
 	fildl	(%esp)
-	addl	$5, %eax
+	addl	$4, %esp
 	fdivs	LC27
-	subl	$4, %esp
-	cmpl	%eax, %edi
-	fstpl	(%esp)
-	jl	L318
-	jmp	L317
-L327:
-	pushl	%edi
-	pushl	$LC23
-	jmp	L330
-L328:
-	movsbl	%dl,%eax
-	pushl	%eax
-	movl	__imp___iob, %eax
-	pushl	%ebx
-	pushl	%edi
-	addl	$64, %eax
-	pushl	$LC25
-	pushl	%eax
-	call	_fprintf
-L329:
-	movl	$1, %eax
-	jmp	L302
-L317:
-	movl	$LC29, %edx
-L318:
-	pushl	%edx
-	pushl	%edi
-	pushl	$LC30
+	fstpl	12(%esp)
+	movl	12(%ebp), %eax
+	addl	$5, %eax
+	cmpl	%edi, %eax
+	jle	L412
+L393:
+	movl	%edx, 8(%esp)
+	movl	%edi, 4(%esp)
+	movl	$LC30, (%esp)
 	call	_printf
 	movl	12(%ebp), %ebx
-	addl	$20, %esp
-	cmpl	%edi, %ebx
-	jge	L326
-	imull	$-81, %ebx, %eax
-	imull	$81, %ebx, %edx
-	leal	-12(%ebp), %ecx
-	addl	%ecx, %eax
-	leal	-8352(%edx,%eax), %esi
-L322:
-	pushl	%ebx
+	jmp	L404
+	.p2align 4,,7
+L413:
+	movl	%ebx, 4(%esp)
 	incl	%ebx
-	pushl	$LC31
+	movl	$LC31, (%esp)
 	call	_printf
-	popl	%eax
-	popl	%edx
-	pushl	%esi
+	movl	%esi, (%esp)
 	addl	$81, %esi
 	call	__ZNK5Board5printEv
-	popl	%eax
+L404:
 	cmpl	%edi, %ebx
-	jl	L322
-L326:
+	jl	L413
+	addl	$8396, %esp
 	xorl	%eax, %eax
-L302:
-	leal	-12(%ebp), %esp
 	popl	%ebx
 	popl	%esi
 	popl	%edi
 	popl	%ebp
 	ret
+	.p2align 4,,7
+L409:
+	movl	$954437177, %eax
+	imull	%esi
+	movl	%esi, %eax
+	sarl	$31, %eax
+	sarl	%edx
+	subl	%eax, %edx
+	leal	(%edx,%edx,8), %edx
+	cmpl	%edx, %esi
+	je	L381
+	movl	%edi, 8(%esp)
+	movl	$LC24, %eax
+L407:
+	movl	%eax, 4(%esp)
+L406:
+	movl	__imp___iob, %eax
+	addl	$64, %eax
+	movl	%eax, (%esp)
+	call	_fprintf
+L405:
+	addl	$8396, %esp
+	movl	$1, %eax
+	popl	%ebx
+	popl	%esi
+	popl	%edi
+	popl	%ebp
+	ret
+L412:
+	movl	$LC29, %edx
+	jmp	L393
+L408:
+	movl	%edi, 8(%esp)
+	movl	$LC22, %ecx
+	movl	%ecx, 4(%esp)
+	jmp	L406
+L410:
+	movl	%edi, 8(%esp)
+	movl	$LC26, %eax
+	jmp	L407
+L402:
+	movl	%edi, 8(%esp)
+	movl	$LC23, %edi
+	movl	%edi, 4(%esp)
+	jmp	L406
+L411:
+	movl	$2147483642, 12(%ebp)
+	jmp	L391
+L403:
+	movl	%ebx, 12(%esp)
+	movsbl	%dl,%eax
+	movl	$LC25, %esi
+	movl	%eax, 16(%esp)
+	movl	__imp___iob, %eax
+	movl	%edi, 8(%esp)
+	movl	%esi, 4(%esp)
+	addl	$64, %eax
+	movl	%eax, (%esp)
+	call	_fprintf
+	jmp	L405
 	.def	___main;	.scl	2;	.type	32;	.endef
 	.section .rdata,"dr"
-LC33:
-	.ascii "makeCheckCell\0"
+	.align 4
 LC34:
 	.ascii "usage>sudoku quiz-file [offset]\12\0"
+LC33:
+	.ascii "makeCheckCell\0"
 	.text
 	.align 2
+	.p2align 4,,15
 .globl _main
 	.def	_main;	.scl	2;	.type	32;	.endef
 _main:
 	pushl	%ebp
-	movl	$6816, %eax
+	movl	$6856, %eax
 	movl	%esp, %ebp
-	pushl	%esi
-	pushl	%ebx
 	call	__alloca
-	movl	8(%ebp), %ebx
-	movl	12(%ebp), %esi
+	movl	%ebx, -12(%ebp)
+	movl	12(%ebp), %ebx
+	andl	$-16, %esp
+	movl	%esi, -8(%ebp)
+	movl	8(%ebp), %esi
+	movl	$16, %eax
+	movl	%edi, -4(%ebp)
+	call	__alloca
 	call	___main
-	cmpl	$2, %ebx
-	jne	L333
-	pushl	$LC33
-	pushl	4(%esi)
-	call	_strcmp
-	popl	%ecx
-	testl	%eax, %eax
-	popl	%ebx
-	jne	L332
-	leal	-6824(%ebp), %eax
-	pushl	%eax
-	call	__ZN11SolveSudoku13makeCheckCellEv
-	xorl	%eax, %eax
-	jmp	L331
-L332:
-	pushl	$0
-	jmp	L335
-L333:
-	cmpl	$3, %ebx
-	jne	L334
-	pushl	$0
-	pushl	$0
-	pushl	8(%esi)
-	call	_strtol
-	addl	$12, %esp
-	pushl	%eax
-L335:
-	pushl	4(%esi)
-	call	__Z6solverPKci
-	jmp	L331
-L334:
-	pushl	$LC34
+	cmpl	$2, %esi
+	je	L420
+	cmpl	$3, %esi
+	je	L421
+	movl	$LC34, %esi
+	movl	%esi, 4(%esp)
 	movl	__imp___iob, %eax
 	addl	$64, %eax
-	pushl	%eax
+	movl	%eax, (%esp)
 	call	_fprintf
+	movl	-12(%ebp), %ebx
 	movl	$1, %eax
-L331:
-	leal	-8(%ebp), %esp
-	popl	%ebx
-	popl	%esi
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
 	popl	%ebp
 	ret
+	.p2align 4,,7
+L420:
+	cld
+	movl	4(%ebx), %ebx
+	movl	$LC33, %edi
+	movl	$14, %ecx
+	movl	%ebx, %esi
+	repe
+	cmpsb
+	jne	L416
+	leal	-6840(%ebp), %eax
+	movl	%eax, (%esp)
+	call	__ZN11SolveSudoku13makeCheckCellEv
+	movl	-12(%ebp), %ebx
+	xorl	%eax, %eax
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.p2align 4,,7
+L421:
+	xorl	%eax, %eax
+	xorl	%edi, %edi
+	movl	%eax, 8(%esp)
+	movl	%edi, 4(%esp)
+	movl	8(%ebx), %eax
+	movl	%eax, (%esp)
+	call	_strtol
+	movl	%eax, 4(%esp)
+	movl	4(%ebx), %eax
+	movl	%eax, (%esp)
+	call	__Z6solverPKci
+L422:
+	movl	-12(%ebp), %ebx
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.p2align 4,,7
+L416:
+	movl	%ebx, (%esp)
+	xorl	%eax, %eax
+	movl	%eax, 4(%esp)
+	call	__Z6solverPKci
+	jmp	L422
 	.def	_puts;	.scl	2;	.type	32;	.endef
 	.def	_putchar;	.scl	2;	.type	32;	.endef
 	.def	_strtol;	.scl	2;	.type	32;	.endef
-	.def	_strcmp;	.scl	2;	.type	32;	.endef
 	.def	_clock;	.scl	2;	.type	32;	.endef
 	.def	_fclose;	.scl	2;	.type	32;	.endef
 	.def	_fread;	.scl	2;	.type	32;	.endef
